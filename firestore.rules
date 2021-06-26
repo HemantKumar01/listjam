@@ -1,0 +1,15 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /userMessages/{message} {
+      allow read, write: if
+          request.auth != null;
+    }
+   	// Make sure the uid of the requesting user matches name of the user
+  	// document.
+    match /users/{emailId} {
+      allow read, update, delete, create: if request.auth != null && request.auth.token.email == emailId;
+      
+    }
+  }
+}

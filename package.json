@@ -1,0 +1,15 @@
+{
+  "name": "list-jam",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "firebase serve --only hosting",
+    "build": "firebase deploy"
+  },
+  "author": "Hemant Kumar",
+  "license": "MIT",
+  "dependencies": {
+    "firebase": "^8.6.5"
+  }
+}

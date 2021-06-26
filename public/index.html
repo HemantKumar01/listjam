@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+    <title>List Jam</title>
+    <!-- Meta tags for seo (to be edited later) -->
+    <meta name="theme-color" content="#0274f7" />
+    <meta name="title" content="List Jam">
+    <meta name="keywords" content="list, send,share,create List,List Jam" />
+    <meta name="description" content="List Jam is a web app to let you make and send lists" />
+    <meta name="HandheldFriendly" content="true" />
+
+    <!-- open graph meta tags -->
+    <meta name="og:title" content="List Jam">
+    <meta name="og:description" content="create, share, and mark lists easily">
+
+    <link rel=" stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon.ico?v=1" type="image/x-icon">
+
+    <link rel="preload" as="image" href="./Google__G__Logo.svg.webp" />
+    <link rel="preload" as="image" href="box.png" />
+    <link rel="preconnect" href="https://firebase.googleapis.com/">
+    <link rel="preconnect" href="https://apis.google.com/">
+    <link rel="preconnect" href="https://ka-f.fontawesome.com/">
+
+
+    <script src="https://kit.fontawesome.com/b35edf3a51.js" crossorigin="anonymous" defer></script>
+    <script src="https://apis.google.com/js/api:client.js"></script>
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/8.6.2/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/8.6.2/firebase-auth.js"></script>
+    <script defer src="/__/firebase/8.6.2/firebase-database.js"></script>
+    <script defer src="/__/firebase/8.6.2/firebase-firestore.js"></script>
+    <script defer src="/__/firebase/8.6.2/firebase-functions.js"></script>
+    <script defer src="/__/firebase/8.6.2/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/8.6.2/firebase-storage.js"></script>
+    <script defer src="/__/firebase/8.6.2/firebase-analytics.js"></script>
+    <script defer src="/__/firebase/8.6.2/firebase-remote-config.js"></script>
+    <script defer src="/__/firebase/8.6.2/firebase-performance.js"></script>
+    <script src="process.js" defer></script>
+    <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    <script>
+        var open = false;
+
+        function toggleNav() {
+            var sideNav = document.querySelector("#account");
+            var avatar = document.querySelector("#avatar");
+            sideNav.style.width = open ? "300px" : "0px";
+            avatar.style.right = open ? "120px" : "20px";
+            avatar.style.top = open ? "20px" : "5px";
+            open = !open;
+        }
+    </script>
+
+</head>
+
+<body>
+    <!-- position fixed elements -->
+
+    <!--for custom alerts,confirmations and inputs(prompts)-->
+    <div class="flexbox popup glass">
+
+    </div>
+
+    <!-- main elements -->
+    <header class="flexbox">
+
+        <h2> List Jam</h2>
+        <nav>
+            <button id="avatar" name="avatar button" onclick="toggleNav()" class="flexbox glass">
+                <i class="fa fa-user"></i>
+            </button>
+        </nav>
+    </header>
+    <aside id="account" class="flexbox glass" style="justify-content:flex-start;">
+        <button id="close" onclick="toggleNav()">
+            &Cross;
+        </button>
+        <h3 style="margin-top: 100px;">Anonymous</h3>
+        <button id="signOut" name="signout" onclick="signOut()">
+            <i class="fa fa-sign-out"> Sign out </i>
+        </button>
+    </aside>
+
+    <div id="main" class="flexbox">
+
+        <div id="logged_in" class="flexbox"
+            style="display: none; justify-content: flex-start; align-items: flex-start;">
+
+            <div id="mainTab">
+                <div class="flexbox" style="width: 100%; flex-wrap: nowrap;">
+
+                    <button id="recieved" class="tab active">
+                        <h4><i class="fa fa-download"></i></h4>
+                        Recieved
+                    </button>
+
+                    <button id="sent" class="tab">
+                        <h4><i class="fa fa-share-square"></i></h4>
+                        Sent
+                    </button>
+
+                </div>
+                <div class="indicator"></div>
+            </div>
+
+            <div id="subTab" class="flexbox glass">
+                <div id="all" onclick="filterMessages(this.id)" class="tab">All</div>
+                <div id="todo" onclick="filterMessages(this.id)" class="tab active">To Do</div>
+                <div id="done" onclick="filterMessages(this.id)" class="tab">Done</div>
+            </div>
+            <div id="send" class="flexbox">
+                <input type="text" placeholder="Send Something">
+                <button id="sendButton">
+                    <i class="fa fa-send"></i>
+                </button>
+                <span id="addFriends" class="glass" onclick="addFriend()">
+                    + Add Friend
+                </span>
+            </div>
+            <div class="flexbox workplace">
+
+            </div>
+        </div>
+
+
+        <div id="si" class="flexbox" style="display: none;">
+            <h1>Stuck at</h1>
+            <h1>Memorizing?</h1>
+            <h2>Just</h2>
+            <h2> List it here</h2>
+            <button id="signin" name="signin" class="signIn flexbox">
+                <img width="20px" height="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in"
+                    src="./Google_Logo.png" loading="lazy" />
+                <h4>Login with Google<h3>
+            </button>
+        </div>
+    </div>
+    <script src="sign-in.js" defer></script>
+    <script src="tabs.js"></script>
+    <script>
+        configureTabs();
+
+        function removeItem(id, recievedMessage = true) {
+            var messageBox = document.getElementById(id);
+            var chbox = document.querySelector(`#${id} input`);
+
+            messageBox.style.animation = "fade-out 0.5s ease forwards";
+
+            var savedData = JSON.parse(localStorage.getItem("messages"));
+
+            if (chbox.checked)
+                savedData[recievedMessage ? "recieved" : "sent"][id].status = "done";
+            else
+                savedData[recievedMessage ? "recieved" : "sent"][id].status = "todo";
+
+            localStorage.setItem("messages", JSON.stringify(savedData));
+            if (Object.keys(savedData.recieved).length == 0 && Object.keys(savedData.sent).length == 0) {
+                localStorage.removeItem("messages");
+            }
+        }
+
+        function filterMessages(query) {
+
+            Array.from(tabs).forEach(tab => {
+                tab.classList.remove("active");
+            });
+
+            window.filter = query;
+            document.getElementById(query).classList.add("active");
+
+            // reload messages with current filter enabled;
+            if (window.showingRecieved) {
+                showRecieved();
+            } else {
+                showSent();
+            }
+        }
+
+        var setPopupContent = (title, message, okFunction, cancelFunction) => {
+            var popup = document.querySelector(".popup");
+            var text =
+                `<h3> ${title} </h3>
+                    ${message}
+                <div class="flexbox">
+                    <button id = "popupOk" name="ok">OK</button>
+                    <button id="popupCancel" name="cancel">Cancel</button>
+                </div>`
+            popup.innerHTML = text;
+            document.getElementById("popupOk").onclick = okFunction;
+            document.getElementById("popupCancel").onclick = cancelFunction;
+
+        }
+
+        var showPopup = () => {
+            var popup = document.querySelector(".popup");
+            popup.style.opacity = "1";
+            popup.style.pointerEvents = "all";
+        }
+
+        var hidePopup = () => {
+            var popup = document.querySelector(".popup");
+            popup.style.opacity = '0';
+            popup.style.pointerEvents = 'none';
+        }
+        var validateFriend = () => {
+            var friendEmail = document.querySelector("#friendEmail").value;
+            var userRef = firebase.firestore().collection("users").doc(friendEmail);
+
+            userRef.get().then((doc) => {
+                if (!doc) {
+                    alert("NOT FOUND!");
+                }
+                console.log(doc)
+            });
+        }
+
+        function addFriend() {
+            setPopupContent("Add Friend", ` <input type="email" placeholder="example@abc.com" id="friendEmail" size="20" autofocus
+                required>`, validateFriend, hidePopup);
+            showPopup();
+        }
+    </script>
+    <!--firebase-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            initFirebaseAuth();
+            document.querySelector("#recieved").click();
+
+            // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+            // // The Firebase SDK is initialized and available here!
+            //
+            // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
+            // firebase.firestore().doc('/foo/bar').get().then(() => { });
+            // firebase.functions().httpsCallable('yourFunction')().then(() => { });
+            // firebase.messaging().requestPermission().then(() => { });
+            // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+            firebase.analytics(); // call to activate
+            // firebase.analytics().logEvent('tutorial_completed');
+            firebase.performance(); // call to activate
+            //
+            // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+            try {
+                let app = firebase.app();
+                let features = [
+                    'auth',
+                    'database',
+                    'firestore',
+                    'functions',
+                    'messaging',
+                    'storage',
+                    'analytics',
+                    'remoteConfig',
+                    'performance',
+                ].filter(feature => typeof app[feature] === 'function');
+
+            } catch (e) {
+                console.error(e);
+
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>
