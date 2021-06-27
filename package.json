@@ -1,7 +1,7 @@
 {
   "name": "list-jam",
   "version": "1.0.0",
-  "description": "",
+  "description": "An android app made with firebase. Easily add items to list, send it to someone and check if it's done.",
   "main": "index.js",
   "scripts": {
     "test": "firebase serve --only hosting",
@@ -9,7 +9,11 @@
   },
   "author": "Hemant Kumar",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HemantKumar01/listjam"
+  },
   "dependencies": {
-    "firebase": "^8.6.5"
+    "firebase": "^8.6.8"
   }
 }
