@@ -1,11 +1,11 @@
 {
   "name": "list-jam",
   "version": "1.0.0",
-  "description": "An android app made with firebase. Easily add items to list, send it to someone and check if it's done.",
+  "description": "Simplest way add, maintain and share ToDo list Items",
   "main": "index.js",
   "scripts": {
     "test": "firebase serve --only hosting",
-    "build": "npm install && firebase deploy"
+    "build": "npm install && npm i -g firebase-tools && firebase deploy"
   },
   "author": "Hemant Kumar",
   "license": "MIT",
@@ -14,6 +14,7 @@
     "url": "https://github.com/HemantKumar01/listjam"
   },
   "dependencies": {
-    "firebase": "^8.6.8"
+    "firebase": "^8.6.8",
+    "kill-port": "^1.6.1"
   }
 }

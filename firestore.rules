@@ -8,7 +8,7 @@ service cloud.firestore {
    	// Make sure the uid of the requesting user matches name of the user
   	// document.
     match /users/{emailId} {
-      allow read, update, delete, create: if request.auth != null && request.auth.token.email == emailId;
+      allow read, update, delete, create: if request.auth != null;
       
     }
   }
