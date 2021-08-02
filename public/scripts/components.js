@@ -47,7 +47,7 @@ function addNewItem() {
         <option value = "important"> Important </option>
     </select>
     <div class="buttons">
-        <button type="button" id="cancelButton" class="secondary">Cancel</button>
+        <button type="button" id="cancelButton" class="secondary" onclick='hidePopup()'>Cancel</button>
         <button type="button" id="submitItem" class="primary">Add</button>
     </div>
     `)
