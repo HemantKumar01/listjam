@@ -27,7 +27,6 @@
     <link rel="manifest" href="manifest.json">
     <link rel="shortcut icon" href="favicon.ico?v=1" type="image/x-icon">
     <link rel="preload" as="image" href="/images/sticky-notes-outline.png">
-    <link rel="preload" as="image" href="/images/Google_Logo.png">
     <link rel="preconnect" href="https://firebase.googleapis.com/">
     <link rel="preconnect" href="https://apis.google.com/">
     <link rel="preconnect" href="https://ka-f.fontawesome.com/">
@@ -38,9 +37,9 @@
     <script defer="" src="/__/firebase/8.8.0/firebase-app.js"></script>
     <!-- include only the Firebase features as you need -->
     <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/8.8.0/firebase-auth.js"></script>
-    <script defer src="/__/firebase/8.8.0/firebase-firestore.js"></script>
-    <!-- <script defer src="/__/firebase/8.8.0/firebase-database.js"></script>    
+    <!-- <script defer src="/__/firebase/8.8.0/firebase-auth.js"></script>
+        <script defer src="/__/firebase/8.8.0/firebase-database.js"></script>
+        <script defer src="/__/firebase/8.8.0/firebase-firestore.js"></script>
         <script defer src="/__/firebase/8.8.0/firebase-functions.js"></script>
         <script defer src="/__/firebase/8.8.0/firebase-messaging.js"></script>
         <script defer src="/__/firebase/8.8.0/firebase-storage.js"></script> -->
@@ -51,7 +50,7 @@
       initialize the SDK after all desired features are loaded, set useEmulator to false
       to avoid connecting the SDK to running emulators.
     -->
-    <script defer="" src="/__/firebase/init.js?useEmulator=false"></script>
+    <script defer="" src="/__/firebase/init.js?useEmulator=true"></script>
 
 
 
@@ -117,63 +116,15 @@
 </head>
 
 <body>
-    <header>List Jam
-        <nav>
-            <!-- *show avatar(/profile pic after sign in ) -->
-            <button class="avatar" onclick="showNav()">
-                <i class='fa fa-user'> </i>
-            </button>
-        </nav>
-
-        <nav id="sideBar" class="glass flexbox">
-            <button class="close" onclick="hideNav()">✕</button>
-            <div class="avatar" style="cursor:unset;">
-                <i class='fa fa-user'> </i>
-            </div>
-            <h2 class="userName"></h2>
-            <p class="email"></p>
-            <button class="signInButton" onclick="signIn()">
-                <img src="/images/Google_Logo.png" alt="Google" height="100%" width="auto">
-                Sign In
-            </button>
-        </nav>
-
-    </header>
-
-    <div class="infoPane">
-        <div class="vertical-center flexbox">
-            <span class="back" onclick="showFriends()">
-                <i class="fa fa-arrow-circle-left"></i>
-            </span>
-            <img alt="profile photo of friend" id="profilePic" height="40px" width="auto">
-            <div class="name"></div>
-        </div>
-    </div>
-
+    <header>List Jam</header>
     <div id="filter" class="flexbox">
         <button id="all" onclick="filterMessages(this.id)" class="tab">All</button>
         <button id="todo" onclick="filterMessages(this.id)" class="tab active">ToDo</button>
         <button id="done" onclick="filterMessages(this.id)" class="tab">Done</button>
     </div>
-
     <div class="flexbox workspace">
-
     </div>
-
     <div class="newItem" onclick="addNewItem()">+</div>
-    <div class="newFriend" onclick="addNewFriend()">+ Add Friend</div>
-
-    <!-- recieved/ sent tabs at bottom of the page -->
-    <div id="mainTabs" class="flexbox">
-        <div class="mainTab active" id="recieved" onclick="showRecieved()">
-            <i class="fa fa-envelope-open"></i>
-            Recieved
-        </div>
-        <div class="mainTab" id="send" onclick="showFriends()">
-            <i class="fa fa-plane"></i>
-            Send
-        </div>
-    </div>
 
     <div class="popup flexbox">
         <div class="content"></div>
@@ -183,42 +134,19 @@
     <!-- a container for app install promotion prompts to be used later -->
     <div class="promotion"></div>
 
-    <script>
-        function offline() {
-            if (!navigator.onLine) {
-                alert("You are offline! connect to internet and try again later.")
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        window.onload = () => {
-            //*showing recieved messages by default on load;
-            document.getElementById("recieved").click();
-            document.querySelector("#filter .tab.active").click();
-
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register("./serviceWorker.js")
-            }
-
-            if (navigator.onLine) {
-                if (isUserSignedIn())
-                    checkForNewMessages(getEmail());
-            }
-        }
-    </script>
 
     <script src="/scripts/install.js"></script>
     <script src="/scripts/firebaseSettings.js"></script>
-    <script src="/scripts/firestore.js"></script>
-    <script src="/scripts/auth.js"></script>
     <script src="/scripts/messages.js"></script>
     <script src="/scripts/components.js"></script>
-    <script src="/scripts/send.js"></script>
-
-    <!--? load from internet resource(not in cache) -->
-    <script src="/scripts/update.js"></script>
+    <script>
+        window.onload = () => {
+            document.querySelector("#filter .tab.active").click();
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register("./serviceWorker.js")
+            }
+        }
+    </script>
 
 
 </body>

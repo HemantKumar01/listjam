@@ -2,11 +2,6 @@
 
 :root {
     --primary-clr: #006eff;
-    --primary-dark-clr: #003c8c;
-    --primary-light-clr: #afd1ff;
-    --msg-normal-clr: #08a88a;
-    --msg-important-clr: #d31900;
-    --msg-lessImportant-clr: #858585;
 }
 
 * {
@@ -24,7 +19,6 @@ body {
     scroll-behavior: smooth;
 
     font-family: "Open Sans", sans-serif;
-
 }
 
 html {
@@ -32,7 +26,6 @@ html {
 }
 
 header {
-    position: relative;
     width: 100vw;
     height: 60px;
 
@@ -44,19 +37,8 @@ header {
     text-align: center;
 }
 
-header nav {
-    position: absolute;
-    right: 10px;
-
-    display: inline-block;
-    height: 100%;
-    width: auto;
-}
-
-
 button {
     cursor: pointer;
-    user-select: none;
     padding: 10px 20px;
     margin: 5px 10px;
     border: none;
@@ -68,13 +50,6 @@ button:hover {
     box-shadow: 0 0 10px rgb(139, 139, 139);
     border-bottom: 2px solid var(--primary-clr);
 }
-
-button[disabled] {
-    background-color: gray !important;
-    box-shadow: none !important;
-    border: none !important;
-}
-
 
 button.primary {
     background-color: var(--primary-clr);
@@ -104,7 +79,6 @@ select {
 }
 
 
-
 input:focus,
 select:focus {
     border-color: var(--primary-clr);
@@ -123,157 +97,7 @@ label {
     align-items: center;
 }
 
-.glass {
-    background-color: rgba(255, 255, 255, 0.637);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.507);
-}
-
-.vertical-center {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.close {
-    cursor: pointer;
-
-    position: absolute;
-    top: 5px;
-    right: 5px;
-
-    font-family: Monospace;
-    text-align: right;
-    font-size: 25px;
-    font-weight: 500;
-
-    height: 1.5em;
-    width: 1.5em;
-    margin: 0 !important;
-
-    background-color: transparent;
-
-}
-
-.close:hover {
-    outline: none !important;
-    border: none !important;
-    box-shadow: none !important;
-}
-
-.avatar {
-    cursor: pointer;
-
-    border: none;
-    outline: none !important;
-    border-radius: 50%;
-    margin-top: 10px;
-    padding: 0;
-    box-shadow: none;
-    width: 40px;
-    height: 40px;
-
-
-    font-size: 16px;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    line-height: 40px;
-    /* background-image:profilePic is set in /script/auth.js */
-
-    transition: 0.5s;
-}
-
-.avatar:hover {
-    outline: none !important;
-    border: none !important;
-    border-radius: 0;
-    box-shadow: none;
-}
-
-.userName {
-    font-family: sans-serif;
-    font-size: 22px;
-    font-weight: 600;
-    color: #353638;
-}
-
-.email {
-    font-family: monospace;
-    font-size: 18px;
-    font-weight: 300;
-    color: #353638;
-}
-
-#sideBar {
-    position: fixed;
-    right: -100%;
-    top: 0;
-    height: 100vh;
-    min-width: 250px;
-    padding: 30px 10px;
-
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-
-    transition: 1s ease-in-out;
-    z-index: 2;
-}
-
-#sideBar button {
-    margin: 20px 0;
-}
-
-#sideBar .close {
-    right: auto;
-    left: 5px;
-}
-
-#sideBar .avatar {
-    border-radius: 0;
-}
-
-.signInButton {
-    position: relative;
-    padding: 10px 20px;
-    background-color: var(--primary-clr);
-    color: white;
-    border-radius: 20px;
-    font-size: 22px;
-    height: calc(1em + 20px);
-
-    /** to adjust absolutely positioned google logo on left*/
-    padding-left: 50px;
-
-}
-
-.signInButton img {
-    position: absolute;
-    left: 0;
-    top: 0;
-
-    height: 100%;
-    width: auto;
-    padding: 10px;
-    border-radius: 50%;
-
-    background-color: white;
-}
-
-.signOutButton {
-    padding: 10px 20px;
-    background-color: #353638;
-    color: rgb(224, 231, 241);
-    border-radius: 0;
-    font-size: 18px;
-    height: calc(1em + 20px);
-}
-
 #filter {
-    user-select: none;
-
     height: 50px;
     width: 100vw;
     background-color: rgb(255, 255, 255);
@@ -291,31 +115,34 @@ label {
     font-size: 18px;
 
     transition: 0.5s;
-    z-index: 0;
 }
 
 #filter button.active {
     background-color: rgb(255, 255, 255);
     box-shadow: 0 5px 0 -1px var(--primary-clr);
-    z-index: 1;
+    z-index: 2;
+}
+
+.close {
+    cursor: pointer;
+
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    font-family: Monospace;
+    text-align: right;
+
+    height: 1.5em;
+    width: 1.5em;
 }
 
 .workspace {
-    position: relative;
-
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
-    align-content: flex-start !important;
 
     padding: 20px 10px;
-    padding-bottom: 55px;
-
-    height: calc(100% - 115px);
-    overflow-y: scroll;
-    overflow-x: hidden;
-    width: 100vw;
-
 }
 
 .empty {
@@ -326,50 +153,11 @@ label {
     animation: fade-in 0.7s backwards ease-in-out;
 }
 
-#mainTabs {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    height: 50px;
-    width: 100vw;
-
-    background-color: var(--primary-clr);
-    color: white;
-
-    flex-wrap: nowrap;
-    justify-content: center;
-}
-
-.mainTab {
-    cursor: pointer !important;
-    user-select: none;
-
-    height: 100%;
-    width: 50vw;
-    max-width: 300px;
-
-    text-align: center;
-    line-height: 50px;
-    font-size: 20px;
-
-    transition: 0.75s;
-}
-
-.mainTab:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.603);
-    z-index: 1;
-}
-
-.mainTab.active {
-    background-color: var(--primary-dark-clr);
-    z-index: 1;
-}
-
 .newItem {
     cursor: pointer;
 
     position: absolute;
-    bottom: 65px;
+    bottom: 10px;
     right: 10px;
 
     line-height: 1.5em;
@@ -392,172 +180,6 @@ label {
 .newItem:hover {
     background-color: white;
     color: var(--primary-clr);
-}
-
-.newFriend {
-    display: none;
-    cursor: pointer;
-
-    position: absolute;
-    bottom: 65px;
-    right: 10px;
-
-    line-height: 2.5em;
-    text-align: center;
-    font-size: 20px;
-    font-weight: 500;
-    color: white;
-    background-color: var(--primary-clr);
-
-    width: 14ch;
-    height: 2.5em;
-    border-radius: 1.25em;
-    box-shadow: 0 0 10px rgb(146, 146, 146);
-
-    transition: 0.5s;
-
-    -webkit-tap-highlight-color: transparent;
-}
-
-.newFriend:hover {
-    background-color: white;
-    color: var(--primary-clr);
-}
-
-.friend {
-    cursor: pointer;
-
-    position: relative;
-    box-sizing: content-box;
-    width: 90vw;
-    max-width: 300px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.582);
-    padding: 10px 10px;
-    padding-left: 70px;
-}
-
-.friend img {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    border-radius: 50%;
-}
-
-.friend .name {
-    display: block;
-    margin: 10px;
-    max-width: calc(100% - 60px);
-    font-weight: 800;
-    font-size: 22px;
-}
-
-.friend .email {
-    display: block;
-    margin: 10px;
-    max-width: calc(100% - 60px);
-    font-family: monospace;
-    letter-spacing: 0.2ch;
-    font-weight: 100;
-    font-size: 18px;
-}
-
-
-.infoPane {
-    display: none;
-    position: relative;
-    padding: 10px 20px;
-    height: 60px;
-    background-color: var(--primary-clr);
-    color: white;
-}
-
-.infoPane>.vertical-center {
-    height: 40px;
-}
-
-.infoPane img#profilePic {
-    display: inline-block;
-    border-radius: 0;
-    margin: 0 20px;
-}
-
-.infoPane .name {
-    display: inline-block;
-    font-size: 18px;
-    font-weight: 200;
-    line-height: 60px;
-
-}
-
-.infoPane .back {
-    cursor: pointer;
-    font-size: 30px;
-}
-
-#sendInput {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 0;
-    width: 100%;
-    min-height: 60px;
-    margin-top: 20px;
-    background-color: #5d5d5d3b;
-    padding: 10px;
-    padding-top: 1.5em;
-}
-
-/** making everything of same height to make things look good*/
-#sendInput input,
-select,
-button {
-    background-color: white;
-    height: 47px;
-}
-
-/** hiding the content of and instead just showing their respective colors */
-/** see :root for respective colors(lessImportant|normal|important) */
-#sendInput select {
-    width: 20px;
-    overflow: hidden;
-    margin: 0;
-    border-right: none;
-
-    /*? initial color(normal) */
-    background-color: var(--msg-normal-clr);
-    color: white !important;
-    transition: 0.5s;
-
-    border-radius: 1em 0 0 1em;
-}
-
-/** resetting option to white background and normal style  */
-#sendInput select option {
-    background-color: white !important;
-    color: black !important;
-    height: 2em;
-    width: 10ch;
-}
-
-#sendInput input {
-    max-width: 300px;
-    width: 65vw;
-    margin: 0;
-    border-left: none;
-    border-right: none;
-    border-radius: 0 1em 1em 0;
-}
-
-#sendInput button {
-    background-color: var(--primary-clr);
-    color: white;
-    margin: 0;
-    width: 47px;
-    height: 47px;
-    padding: 0;
-    border-radius: 3em;
-    margin-left: 10px;
 }
 
 .popup {
@@ -605,7 +227,6 @@ button {
     font-size: 40px;
     color: white;
     z-index: 4;
-    right: 20px;
 }
 
 .popup .buttons {
@@ -619,38 +240,6 @@ button {
     height: 47px;
 }
 
-.loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100vw;
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
-
-    display: grid;
-    place-items: center;
-}
-
-.loader .spinner {
-    height: 70px;
-    width: 70px;
-    background-color: transparent;
-    border-radius: 50%;
-    border: 8px solid #7f7f7f2e;
-    border-top-color: var(--primary-clr);
-    border-bottom-color: var(--primary-clr);
-    animation: spin 1.5s ease-in-out infinite;
-}
-
-.invite {
-    display: block !important;
-    margin: 0 auto !important;
-    width: 90% !important;
-    max-width: 300px !important;
-    height: 60px !important;
-}
 
 .message {
     position: relative;
@@ -658,29 +247,27 @@ button {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    width: 90%;
-    max-width: 320px;
+    width: min(320px, 90%);
     min-height: 50px;
     margin: 10px;
-    padding: 10px 5px 30px 10px;
+    padding: 10px 10px 30px 20px;
     box-shadow: 0 0 10px rgba(83, 83, 83, 0.664);
 
     animation: fade-in 1s ease forwards;
     transition: 0.5s;
-    z-index: 0;
 }
 
 
 .message.normal {
-    border-left: 10px solid var(--msg-normal-clr);
+    border-left: 10px solid #08a88a;
 }
 
 .message.important {
-    border-left: 10px solid var(--msg-important-clr);
+    border-left: 10px solid rgb(211, 25, 0);
 }
 
 .message.will_do_later {
-    border-left: 10px solid var(--msg-lessImportant-clr);
+    border-left: 10px solid rgb(133, 133, 133);
 }
 
 .message .close {
@@ -691,7 +278,7 @@ button {
     right: 10px;
     font-size: 20px;
     font-weight: 400;
-    z-index: 1;
+    z-index: 2;
 
     text-align: right;
 }
@@ -700,22 +287,8 @@ button {
     font-size: 25px;
     font-weight: 600;
     text-transform: capitalize;
-    word-wrap: break-word;
 
     max-width: calc(100% - 111px);
-}
-
-.message.sent .title {
-    max-width: calc(100% - 155px);
-    padding: 10px 5px 30px 0px;
-}
-
-.message.sent .sentAvatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    position: absolute;
-    right: 50px;
 }
 
 .message input {
@@ -748,6 +321,17 @@ button {
     text-align: center;
 }
 
+@media (max-width:670px) {
+    .workspace {
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    .message {
+        width: 90%;
+    }
+}
+
 .promotion {
     position: fixed;
     height: 100vh;
@@ -762,11 +346,10 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     flex-direction: column;
 
     transition: 1s;
-    overflow: hidden;
     z-index: 10;
 }
 
@@ -777,7 +360,7 @@ button {
 
 .promotion button {
     border-color: white;
-    border-width: 2px;
+    border-width: 3px;
     width: 130px;
     height: 47px;
     font-weight: 600;
@@ -798,48 +381,15 @@ button {
 .promotion p {
     text-align: center;
     max-width: min(500px, 70vw);
-    margin: 7px;
+    margin: 10px;
 }
 
-.promotion h2 {
-    font-size: 22px;
-    font-weight: 500;
+.promotion h1 {
+    margin-bottom: 30px;
 }
-
-.promotion h3 {
-    font-size: 20;
-    font-weight: 500;
-}
-
-
 
 .promotion .buttons {
     margin: 20px;
-    margin-top: 30px !important;
-}
-
-
-
-@media (max-width:670px) {
-    .workspace {
-        justify-content: center;
-        align-items: flex-start;
-    }
-
-    .message {
-        width: 90%;
-    }
-}
-
-@media (max-width:400px) {
-    .promotion .buttons {
-        margin: 5px;
-    }
-
-    .promotion button {
-        margin: 5px;
-    }
-
 }
 
 @keyframes fade-in {
@@ -851,15 +401,5 @@ button {
     100% {
         opacity: 1;
         transform: translateY(0px);
-    }
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0);
-    }
-
-    100% {
-        transform: rotate(360deg);
     }
 }
