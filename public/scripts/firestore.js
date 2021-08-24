@@ -3,9 +3,8 @@ function checkForNewMessages(email = getEmail()) {
     const userMessagesRef = window.db.collection('userMessages').doc(email);
     userMessagesRef.get().then((doc) => {
         if (doc.exists) {
-            console.log(doc.data())
             let data = doc.data().messages; //getting just the message array of data
-            console.log(data)
+
             for (let message of data) {
                 message = JSON.parse(message);
                 //dont get confused; message owner here converted to message.sentBy in below function with owner as "me"
@@ -13,6 +12,29 @@ function checkForNewMessages(email = getEmail()) {
             }
         } else {
             console.log("no messages")
+        }
+        userMessagesRef.set({ //removing messages after viewing
+            messages: []
+        })
+    })
+    checkForRealtimeUpdatesInMessages(getEmail())
+}
+
+
+function checkForRealtimeUpdatesInMessages(email) {
+    if (!email) {
+        email = getEmail();
+    }
+    const userMessagesRef = window.db.collection('userMessages').doc(email);
+    userMessagesRef.onSnapshot((doc) => {
+        if (doc.exists) {
+            let data = doc.data().messages; //getting just the message array of data
+
+            for (let message of data) {
+                message = JSON.parse(message);
+                //dont get confused; message owner here converted to message.sentBy in below function with owner as "me"
+                createListItem(message.title, message.time, message.priority, "me", message.owner);
+            }
         }
         userMessagesRef.set({ //removing messages after viewing
             messages: []
