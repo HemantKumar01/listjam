@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let features = [
             // 'auth',
             // 'database',
-            // 'firestore',
+            'firestore',
             // 'functions',
             // 'messaging',
             // 'storage',
