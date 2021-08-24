@@ -61,12 +61,8 @@ function addNewItem() {
         <option value = "important"> Important </option>
     </select>
     <div class="buttons">
-<<<<<<< HEAD
-        <button type = "button" class = "cancelButton secondary" onclick='hidePopup()'> Cancel </button>
-=======
         <button type="button" id="cancelButton" class="secondary" onclick='hidePopup()'>Cancel</button>
->>>>>>> 0a2189cf53328eea3087d2803d0848046f6c4c4b
-        <button type="button" id="submitItem" class="primary">Add</button>
+        <button type="button" id="submitItem" class="cancelButton primary">Add</button>
     </div>
     `)
     let input = document.querySelector(".popup input#title");
