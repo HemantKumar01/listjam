@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "firebase serve --only hosting",
-    "build": "npm install && npm i -g firebase-tools && firebase deploy"
+    "build": "npm install"
   },
   "author": "Hemant Kumar",
   "license": "MIT",
