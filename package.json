@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "firebase serve --only hosting",
-    "build": "npm install && npm i -g firebase-tools && firebase deploy"
+    "build": "npm i"
   },
   "author": "Hemant Kumar",
   "license": "MIT",
@@ -14,7 +14,6 @@
     "url": "https://github.com/HemantKumar01/listjam"
   },
   "dependencies": {
-    "firebase": "^8.6.8",
-    "kill-port": "^1.6.1"
+    "firebase": "^8.6.8"
   }
 }

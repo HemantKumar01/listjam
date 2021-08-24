@@ -1,5 +1,12 @@
 document.addEventListener('DOMContentLoaded', function () {
 
+    //initalize the sign-in system
+    initFirebaseAuth();
+    window.db = firebase.firestore();
+    if (location.hostname === "localhost") {
+        window.db.useEmulator("localhost", 8080);
+    }
+
     // // The Firebase SDK is initialized and available here!
     //
     // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
@@ -17,10 +24,10 @@ document.addEventListener('DOMContentLoaded', function () {
         let features = [
             // 'auth',
             // 'database',
-            // 'firestore',
             // 'functions',
             // 'messaging',
             // 'storage',
+            'firestore',
             'analytics',
             'remoteConfig',
             'performance',
