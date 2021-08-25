@@ -61,11 +61,7 @@ function addNewItem() {
         <option value = "important"> Important </option>
     </select>
     <div class="buttons">
-<<<<<<< HEAD
         <button type="button" id="cancelButton" class="cancelButton secondary" onclick='hidePopup()'>Cancel</button>
-=======
-        <button type="button" id="cancelButton" class="secondary" onclick='hidePopup()'>Cancel</button>
->>>>>>> parent of 3ba02e8 (v2)
         <button type="button" id="submitItem" class="cancelButton primary">Add</button>
     </div>
     `)
