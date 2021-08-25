@@ -4,7 +4,7 @@ function showInstallPromotion() {
     var div = document.querySelector(".promotion")
     div.innerHTML = `
         <img src = "/gifs/412-gift-outline.gif"
-        height = "160px"
+        height = "200px"
         width = "auto">
         <h3>
             Turn your Lists into Super Lists.
@@ -12,9 +12,9 @@ function showInstallPromotion() {
         <h1>
             Access List-Jam at your fingertips!
         </h1>
-        <h3>
+        <h2>
             List-Jam is better on the app, tap to install now.
-        </h3>
+        </h2>
         
         <div class="buttons">
             <button class="secondary" id="cancelInstall">Not Now</button>
