@@ -13,7 +13,7 @@ function initFirebaseAuth() {
 }
 
 //function to be executed above onAuthStateChange if the user is signed in
-function onSignIn() {
+async function onSignIn() {
     if (!isUserSignedIn()) {
         return; //to prevent any unwanted error
     }
@@ -24,8 +24,9 @@ function onSignIn() {
     console.log("signed in :", userName)
 
     showSignedInUI();
-    addUserToDatabase(getEmail(), userName, profilePic);
-    checkForNewMessages(getEmail());
+    await addUserToDatabase(getEmail(), userName, profilePic);
+    await checkForNewMessages(getEmail());
+    checkForRealtimeUpdatesInMessages(getEmail());
 }
 
 //custom sign in to be executed on button click instead of auto-signin

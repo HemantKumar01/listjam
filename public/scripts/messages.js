@@ -102,11 +102,6 @@ function showMessages(person = "me") {
     workspace.innerHTML = "";
 
     if (person == "me") {
-        if (navigator.onLine) {
-            if (isUserSignedIn())
-                checkForNewMessages(getEmail());
-        }
-
         window.friendActive = null;
 
         document.querySelector(".infoPane").style.display = "none"

@@ -103,10 +103,11 @@ function createListItem(title = " ", dateTime = Date.now(), priority = "normal",
 
     localStorage.messages = JSON.stringify(allMessages);
 
-    if (owner == "me")
+    if (owner === "me")
         hidePopup();
 
-    showMessages("me");
+    if (window.tabActive === "recieved")
+        showMessages("me");
 }
 
 function removeItem(messageId) {
@@ -149,6 +150,8 @@ function changeTabUI(idOfTab) {
 function showRecieved() {
     changeTabUI("recieved");
 
+    window.tabActive = "recieved"; //can be sent|recieved
+
     document.querySelector(".newItem").style.display = "block";
     document.querySelector(".newFriend").style.display = "none";
     document.querySelector(".infoPane").style.display = "none";
@@ -160,9 +163,11 @@ function showRecieved() {
 }
 
 function showFriends() {
+
     changeTabUI("send")
 
-    window.friendActive = undefined;
+    window.friendActive = null;
+    window.tabActive = "send"; //can be sent|recieved
 
     document.querySelector("#filter").style.display = "none";
     document.querySelector(".newItem").style.display = "none";

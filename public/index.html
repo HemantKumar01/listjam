@@ -198,13 +198,11 @@
             document.getElementById("recieved").click();
             document.querySelector("#filter .tab.active").click();
 
+            window.tabActive = "recieved"; //can be sent|recieved;
+            window.query = "todo"; //can be all|todo|done
+
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register("./serviceWorker.js")
-            }
-
-            if (navigator.onLine) {
-                if (isUserSignedIn())
-                    checkForNewMessages(getEmail());
             }
         }
     </script>

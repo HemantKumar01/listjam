@@ -16,17 +16,28 @@ function checkForNewMessages(email = getEmail()) {
         userMessagesRef.set({ //removing messages after viewing
             messages: []
         })
+        Promise.resolve();
+    }).catch(err => {
+        console.error(err);
+        Promise.reject();
     })
-    checkForRealtimeUpdatesInMessages(getEmail())
 }
 
 
+//* check for realtime changes in db, so that user does not need to reload every time to get new messages
+//* It does the same thing as the function checkForNewMessages() does;
+//* (called in auth.js after user is signed in)
 function checkForRealtimeUpdatesInMessages(email) {
     if (!email) {
         email = getEmail();
     }
     const userMessagesRef = window.db.collection('userMessages').doc(email);
     userMessagesRef.onSnapshot((doc) => {
+        //do nothing if data is not completely written in database
+        if (doc.metadata.hasPendingWrites) {
+            return;
+        }
+
         if (doc.exists) {
             let data = doc.data().messages; //getting just the message array of data
 
@@ -42,6 +53,8 @@ function checkForRealtimeUpdatesInMessages(email) {
     })
 }
 
+
+
 //* function to be executed on user signIn (creates / updates user name and profiePic url)
 function addUserToDatabase(email, name, profilePicUrl) {
     try {
@@ -51,13 +64,16 @@ function addUserToDatabase(email, name, profilePicUrl) {
                 image: profilePicUrl
             }).then(() => {
                 console.log("name and email successfully written to db!");
+                Promise.resolve();
             })
             .catch((error) => {
                 console.error("Error writing name and email to db: ", error);
+                Promise.reject();
             });
 
     } catch (err) {
         console.error("error while updating/creating your profile in db:", err)
+        Promise.reject();
     }
 }
 
