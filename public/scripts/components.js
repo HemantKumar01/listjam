@@ -47,13 +47,8 @@ function addNewItem() {
         <option value = "important"> Important </option>
     </select>
     <div class="buttons">
-<<<<<<< HEAD
-        <button type="button" id="cancelButton" class="secondary" onclick='hidePopup()'>Cancel</button>
+        <button type="button" id="cancelButton" class="cancelButton secondary" onclick='hidePopup()'>Cancel</button>
         <button type="button" id="submitItem" class="cancelButton primary">Add</button>
-=======
-        <button type="button" id="cancelButton" class="secondary">Cancel</button>
-        <button type="button" id="submitItem" class="primary">Add</button>
->>>>>>> 6ba76ab6469bbac927085aee60fb22ed7e0ab823
     </div>
     `)
     const okButton = document.querySelector("#submitItem");
