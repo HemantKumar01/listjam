@@ -156,13 +156,8 @@ label {
 .newItem {
     cursor: pointer;
 
-<<<<<<< HEAD
     position: fixed;
     bottom: 65px;
-=======
-    position: absolute;
-    bottom: 10px;
->>>>>>> 6ba76ab6469bbac927085aee60fb22ed7e0ab823
     right: 10px;
 
     line-height: 1.5em;
