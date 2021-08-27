@@ -258,18 +258,18 @@ function setInfoPaneContent(email) {
 ? }
 ? }
 */
-async function share(share_object, onShareSuccess, fallback_text, onFallback) {
+async function share(share_object, onShareSuccess, fallback_link) {
     try {
         await navigator.share(share_object)
         if (onShareSuccess)
             onShareSuccess()
 
+
     } catch (err) {
         console.error("error while sharing invite link", err);
-        if (fallback_text) {
-            navigator.clipboard.writeText(fallback_text)
-            if (onFallback)
-                onFallback()
+        if (fallback_link) {
+            navigator.clipboard.writeText(fallback_link)
+            alert("link copied to clipboard.")
         }
     }
 }

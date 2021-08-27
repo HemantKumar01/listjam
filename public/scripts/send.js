@@ -94,11 +94,7 @@ function addNewFriend() {
                             with each other`,
                         title: 'List-Jam invitation'
                     },
-                    null, //onShareSuccess function
                     "https://list-jam.web.app", //to copy if webShare API does not work
-                    () => { //on fallback function
-                        alert("link copied!")
-                    }
                 );
             }
         }

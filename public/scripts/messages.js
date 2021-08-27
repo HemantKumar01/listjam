@@ -126,6 +126,10 @@ function showMessages(person = "me") {
         //* defining messages to show it later down below in this function
         messages = JSON.parse(messages)[person]; //? show person's message (person = email of friend)
 
+        if (!messages) {
+            showEmpty("try sending something to your new list-jam friend", "friend");
+            return;
+        }
     }
 
     var query = window.query;

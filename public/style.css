@@ -434,6 +434,7 @@ label {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.582);
     padding: 10px 10px;
     padding-left: 70px;
+    margin: 10px;
 }
 
 .friend img {
