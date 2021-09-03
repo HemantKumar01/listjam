@@ -10,7 +10,7 @@ function clearCache() {
             })
         }
         alert("ListJam Updated!\n Reloading ListJam to complete update")
-        location.reload();
+        window.location.reload(true);
     }
 }
 
