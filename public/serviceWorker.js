@@ -1,5 +1,5 @@
 //just v-3 of cache will be present in users device as others are deleted
-const cacheName = "listJamCache-v5";
+const cacheName = "listJamCache-v6";
 
 const cacheFirstCache = [
     //? these files below will be first searched from cache instead of internet
@@ -9,21 +9,21 @@ const cacheFirstCache = [
     '/images/icon.png',
     '/favicon.ico',
 
+    '/style.css',
+
     '/scripts/components.js',
     '/scripts/messages.js', ,
     '/scripts/send.js',
     '/scripts/auth.js',
+    "/scripts/update.js",
+    '/scripts/firebaseSettings.js',
+    '/scripts/firestore.js'
 ];
 
 const internetFirstCache = [
     //? these files below will be first searched from cache instead of internet
     '/index.html',
-    '/style.css',
-
-    "/scripts/update.js",
     '/scripts/serviceWorker.js',
-    '/scripts/firebaseSettings.js',
-    '/scripts/firestore.js'
 ]
 
 //* load content(cache first, if not found search over internet)
@@ -74,6 +74,21 @@ self.addEventListener('fetch', (e) => {
 })
 
 
+function clearCache() {
+    caches.keys().then((cacheNames) => {
+        for (let cache of cacheNames) {
+            return caches.delete(cache);
+        }
+    });
+    console.log("Caches cleared")
+}
+
+self.addEventListener("message", (event) => {
+    if (event.data == "update") {
+        clearCache();
+    }
+})
+
 //*init the cache
 self.addEventListener('install', (e) => {
     console.debug("[service worker]: install event fired.")
@@ -83,6 +98,7 @@ self.addEventListener('install', (e) => {
 
         console.debug("[service worker]: Caching all necessary content, to make the app work offline.")
         await cache.addAll(cacheFirstCache.concat(internetFirstCache));
+
     })())
 
 })

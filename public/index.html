@@ -136,6 +136,9 @@
                 <img src="/images/Google_Logo.png" alt="Google" height="100%" width="auto">
                 Sign In
             </button>
+            <button class="primary" id="updateButton">
+                <i class="fa fa-refresh"></i> Update
+            </button>
         </nav>
 
     </header>
@@ -202,7 +205,9 @@
             window.query = "todo"; //can be all|todo|done
 
             if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register("./serviceWorker.js")
+                navigator.serviceWorker.register("./serviceWorker.js").then(() => {
+                    window.isInstalled = true;
+                })
             }
         }
     </script>
