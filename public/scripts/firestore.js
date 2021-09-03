@@ -15,8 +15,9 @@ function checkForNewMessages(email = getEmail()) {
         }
         userMessagesRef.set({ //removing messages after viewing
             messages: []
+        }).then(() => {
+            Promise.resolve();
         })
-        Promise.resolve();
     }).catch(err => {
         console.error(err);
         Promise.reject();

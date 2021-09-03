@@ -25,8 +25,10 @@ async function onSignIn() {
 
     showSignedInUI();
     await addUserToDatabase(getEmail(), userName, profilePic);
-    await checkForNewMessages(getEmail());
-    checkForRealtimeUpdatesInMessages(getEmail());
+    checkForNewMessages(getEmail()).then(() => {
+        console.log("checking for realTime updates in messages")
+        checkForRealtimeUpdatesInMessages(getEmail());
+    });
 }
 
 //custom sign in to be executed on button click instead of auto-signin
