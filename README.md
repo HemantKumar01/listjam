@@ -12,3 +12,6 @@ to their list. You can create/send list items with three priority levels-
 it will work offline and without signing in.
 
 However to share list items or to add friends you have to sign is using your gmail id.
+
+
+Hosted on https://list-jam.web.app
