@@ -9,6 +9,9 @@ const cacheFirstCache = [
     '/images/icon.png',
     '/favicon.ico',
 
+    '/index.html',
+    '/scripts/serviceWorker.js',
+
     '/style.css',
 
     '/scripts/components.js',
@@ -21,9 +24,7 @@ const cacheFirstCache = [
 ];
 
 const internetFirstCache = [
-    //? these files below will be first searched from cache instead of internet
-    '/index.html',
-    '/scripts/serviceWorker.js',
+    //? these files below will be first searched from internet instead of cache
 ]
 
 //* load content(cache first, if not found search over internet)
