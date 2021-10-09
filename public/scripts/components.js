@@ -41,7 +41,13 @@ function hidePopup() {
 function getNewMessageId() {
     var messageNumber = +localStorage.messageNumber || 0; //* for creating its unique id
     localStorage.messageNumber = +messageNumber + 1;
-    return (getEmail() + "m" + messageNumber);
+    var email = "local";
+    try {
+        email = getEmail();
+    } catch (err) {
+        email = "local"
+    }
+    return (email + "m" + messageNumber);
 }
 
 
